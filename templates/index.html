@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <title>Professional Task Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Include Canvas Confetti Library from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+   <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 <body>
+
     <div class="todo-container">
-        <!-- Floating Success Toast Notification -->
         <div id="toast" class="toast-notification">🎉 Great job completing your task! Keep it up!</div>
+
+<!-- User Header & Logout -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <span style="font-size: 14px; color: #7f8c8d;">Hello, <strong>{{ current_user.username }}</strong></span>
+            
+            <!-- Icon-only Logout Button -->
+            <a href="/logout" class="btn-logout" title="Logout">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M10 22H5C3.89543 22 3 21.1046 3 20V4C3 2.89543 3.89543 2 5 2H10V4H5V20H10V22ZM17.5858 13H9V11H17.5858L13.2929 6.70711L14.7071 5.29289L21.4142 12L14.7071 18.7071L13.2929 17.2929L17.5858 13Z"/>
+                </svg>
+            </a>
+        </div>  
 
         <h1 class="head1">My To-Do List</h1>
         <p class="subtitle">Stay organized and productive every day.</p>
@@ -40,14 +52,12 @@
         <ul>
             {% for task in tasks %}
                 <li>
-                    <!-- Inline Edit Form -->
                     <form action="/edit/{{ task.id }}" method="POST" class="edit-form">
                         <input type="text" name="title" value="{{ task.title }}" class="task-input-edit {% if task.complete %}completed{% endif %}" required>
                         <button type="submit" class="btn-save">Save</button>
                     </form>
                     
                     <div class="task-actions">
-                        <!-- Pass the event and URL into our delayed celebration function -->
                         <a href="/update/{{ task.id }}" class="btn-status" {% if not task.complete %}onclick="triggerCelebration(event, this.href)"{% endif %}>
                             {% if task.complete %}Undo{% else %}Done{% endif %}
                         </a>
@@ -60,35 +70,23 @@
         </ul>
     </div>
 
-    <!-- Delayed Celebration Animation Script -->
     <script>
         function triggerCelebration(event, targetUrl) {
-            // Stop the link from instantly redirecting the page
             event.preventDefault();
-
-            // 1. Show floating success toast animation
             const toast = document.getElementById('toast');
             toast.classList.add('show');
 
-            // 2. Trigger multi-burst firework confetti effect
             var count = 200;
-            var defaults = {
-              origin: { y: 0.7 }
-            };
-
+            var defaults = { origin: { y: 0.7 } };
             function fire(particleRatio, opts) {
-              confetti(Object.assign({}, defaults, opts, {
-                particleCount: Math.floor(count * particleRatio)
-              }));
+              confetti(Object.assign({}, defaults, opts, { particleCount: Math.floor(count * particleRatio) }));
             }
-
             fire(0.25, { spread: 26, startVelocity: 55 });
             fire(0.2, { spread: 60 });
             fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
             fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
             fire(0.1, { spread: 120, startVelocity: 45 });
 
-            // 3. Wait 1.8 seconds so you can enjoy the animation, THEN redirect the page
             setTimeout(() => {
                 window.location.href = targetUrl;
             }, 1800);

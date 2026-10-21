@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+<body class="auth-body">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="avatar-circle">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            </div>
+            <h2>Create Account</h2>
+            <p>Sign up to get your own private task list.</p>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert-box">
+              {% for message in messages %}
+                <span>{{ message }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form action="/signup" method="POST" class="auth-form">
+            <div class="input-group">
+                <span class="input-icon">👤</span>
+                <input type="text" name="username" placeholder="Choose a username" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="signup-password" name="password" placeholder="Choose a password" required>
+                <!-- Show / Hide Toggle Button -->
+                <button type="button" class="toggle-password-btn" onclick="togglePassword('signup-password', this)">👁️</button>
+            </div>
+            <button type="submit" class="btn-auth-submit">Sign Up</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a href="/login">Log In</a></p>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId, btn) {
+            const passwordInput = document.getElementById(inputId);
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html> 

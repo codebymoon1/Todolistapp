@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+<body class="auth-body">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="avatar-circle">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <h2>Welcome Back</h2>
+            <p>Log in to view your private tasks.</p>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert-box">
+        {% for message in messages %}
+                <span>{{ message }}</span>
+        {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="/login" method="POST" class="auth-form">
+            <div class="input-group">
+                <span class="input-icon">👤</span>
+                <input type="text" name="username" placeholder="Enter your username" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                <!-- Show / Hide Toggle Button -->
+                <button type="button" class="toggle-password-btn" onclick="togglePassword('password', this)">👁️</button>
+            </div>
+            <button type="submit" class="btn-auth-submit">Log In</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId, btn) {
+            const passwordInput = document.getElementById(inputId);
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html>

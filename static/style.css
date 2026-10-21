@@ -1,7 +1,10 @@
+/* ==========================================
+   1. GLOBAL STYLES & TASK MANAGER (SLATE GREY)
+   ========================================== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f9;
-    color: #333333;
+    background-color: #0f172a; /* Dark Navy Slate Background */
+    color: #f1f5f9;
     margin: 0;
     padding: 50px 20px;
     display: flex;
@@ -10,21 +13,21 @@ body {
     min-height: 100vh;
 }
 
-/* Card Entrance Animation */
 .todo-container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    background: #1e293b; /* Medium Slate Grey Card */
+    border: 1px solid #334155; /* Subtle Grey Border */
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
     width: 100%;
     max-width: 500px;
-    animation: fadeInContainer 0.5s ease-out forwards;
+    animation: fadeInContainer 0.4s ease-out forwards;
 }
 
 @keyframes fadeInContainer {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-15px);
     }
     to {
         opacity: 1;
@@ -33,29 +36,34 @@ body {
 }
 
 h1.head1 {
-    color: #2c3e50;
+    color: #ffffff;
     font-size: 26px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     text-align: center;
+    font-weight: 700;
 }
 
 .subtitle {
-    color: #7f8c8d;
+    color: #94a3b8; /* Muted Grey Text */
     text-align: center;
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .stats-bar {
     display: flex;
     justify-content: space-around;
-    background: #ecf0f1;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #2c3e50;
-    transition: all 0.3s ease;
+    background: #0f172a; /* Inner Inset Grey Box */
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: #cbd5e1;
+    border: 1px solid #334155;
+}
+
+.stats-bar strong {
+    color: #38bdf8; /* Bright Blue Highlight */
 }
 
 form {
@@ -66,70 +74,73 @@ form {
 
 input[type="text"] {
     flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #dcdde1;
-    border-radius: 6px;
-    font-size: 15px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: #f8fafc;
+    font-size: 14px;
     outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.25s ease;
+}
+
+input[type="text"]::placeholder {
+    color: #64748b;
 }
 
 input[type="text"]:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    border-color: #6366f1; /* Indigo Focus Glow */
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .btn-add {
     padding: 12px 20px;
-    background-color: #3498db;
-    color: white;
+    background-color: #6366f1; /* Vivid Indigo Button */
+    color: #ffffff;
     border: none;
-    border-radius: 6px;
-    font-size: 15px;
+    border-radius: 8px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .btn-add:hover {
-    background-color: #2980b9;
+    background-color: #4f46e5;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.btn-add:active {
-    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
 }
 
 .filter-tabs {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 24px;
 }
 
 .filter-tabs a {
-    padding: 6px 14px;
+    padding: 6px 16px;
     text-decoration: none;
-    background: #ecf0f1;
-    color: #7f8c8d;
-    border-radius: 4px;
+    background: #0f172a;
+    color: #94a3b8;
+    border-radius: 6px;
     font-size: 13px;
     font-weight: 600;
+    border: 1px solid #334155;
     transition: all 0.25s ease;
 }
 
 .filter-tabs a.active, .filter-tabs a:hover {
-    background: #3498db;
-    color: white;
-    transform: scale(1.05);
+    background: #6366f1;
+    color: #ffffff;
+    border-color: #6366f1;
 }
 
 h2 {
-    font-size: 18px;
-    color: #34495e;
-    border-bottom: 2px solid #ecf0f1;
-    padding-bottom: 8px;
+    font-size: 16px;
+    color: #f1f5f9;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
     margin-top: 20px;
 }
 
@@ -139,35 +150,21 @@ ul {
     margin: 0;
 }
 
-/* Individual Task Slide-In Animation */
 li {
-    background: #fdfdfd;
-    padding: 10px 15px;
+    background: #0f172a;
+    padding: 12px 16px;
     margin-bottom: 10px;
-    border: 1px solid #e1e8ed;
-    border-radius: 6px;
+    border: 1px solid #334155;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    animation: slideInTask 0.35s ease-out forwards;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 li:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-}
-
-@keyframes slideInTask {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    border-color: #475569;
 }
 
 .edit-form {
@@ -180,38 +177,37 @@ li:hover {
 .task-input-edit {
     border: 1px solid transparent;
     background: transparent;
-    font-size: 15px;
-    padding: 6px;
+    font-size: 14px;
+    padding: 4px 8px;
     border-radius: 4px;
     width: 100%;
-    transition: border-color 0.2s, color 0.3s ease, text-decoration 0.3s ease;
+    color: #f8fafc;
+    transition: all 0.2s;
 }
 
 .task-input-edit:focus {
-    border-color: #3498db;
-    background: white;
+    border-color: #6366f1;
+    background: #1e293b;
 }
 
 .completed {
     text-decoration: line-through;
-    color: #95a5a6;
+    color: #64748b;
 }
 
 .btn-save {
-    padding: 4px 8px;
-    background-color: #f39c12;
-    color: white;
+    padding: 4px 10px;
+    background-color: #334155;
+    color: #f8fafc;
     border: none;
     border-radius: 4px;
     font-size: 12px;
     cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: background-color 0.2s;
 }
 
 .btn-save:hover {
-    background-color: #d68910;
-    transform: scale(1.05);
+    background-color: #475569;
 }
 
 .task-actions {
@@ -221,36 +217,251 @@ li:hover {
 }
 
 .btn-status, .btn-delete {
-    padding: 6px 10px;
+    padding: 6px 12px;
     color: white;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
-    white-space: nowrap;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition: all 0.2s;
 }
 
 .btn-status {
-    background-color: #2ecc71;
+    background-color: #10b981; /* Emerald Green */
 }
 .btn-status:hover {
-    background-color: #27ae60;
+    background-color: #059669;
     transform: scale(1.05);
 }
 
 .btn-delete {
-    background-color: #e74c3c;
+    background-color: #ef4444; /* Alert Red */
 }
 .btn-delete:hover {
-    background-color: #c0392b;
+    background-color: #dc2626;
     transform: scale(1.05);
 }
 
 .empty-msg {
     text-align: center;
-    color: #95a5a6;
+    color: #64748b;
     font-size: 14px;
     margin-top: 20px;
-    animation: fadeInContainer 0.4s ease;
+}
+
+/* Circular Icon Logout Button */
+.btn-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background-color: #0f172a;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: 50%;
+    border: 1px solid #334155;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-logout svg {
+    transition: transform 0.25s ease;
+}
+
+.btn-logout:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+    border-color: #ef4444;
+    transform: translateY(-2px) scale(1.08);
+}
+
+.btn-logout:hover svg {
+    transform: translateX(2px);
+}
+
+/* Toast Notification Animation */
+.toast-notification {
+    position: fixed;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #10b981;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast-notification.show {
+    top: 25px;
+}
+
+/* ==========================================
+   2. AUTHENTICATION PAGES (LOGIN / SIGNUP)
+   ========================================== */
+.auth-body {
+    background-color: #0f172a;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 40px 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    animation: fadeInContainer 0.4s ease-out;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.avatar-circle {
+    width: 70px;
+    height: 70px;
+    background-color: #0f172a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+    color: #6366f1;
+    border: 1px solid #334155;
+}
+
+.auth-header h2 {
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    color: #ffffff;
+    border: none;
+}
+
+.auth-header p {
+    color: #94a3b8;
+    font-size: 13px;
+    margin: 0;
+}
+
+.alert-box {
+    background-color: #450a0a;
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    padding: 12px 15px 12px 45px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.btn-auth-submit {
+    background-color: #6366f1;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 5px;
+}
+
+.btn-auth-submit:hover {
+    background-color: #4f46e5;
+    transform: translateY(-1px);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.auth-footer a {
+    color: #38bdf8;
+    text-decoration: underline;
+    font-weight: 600;
+}
+/* Show / Hide Password Button */
+.toggle-password-btn {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Add extra padding right to the password input so text doesn't overlap the eye icon */
+.input-group input[type="password"],
+.input-group input[type="text"] {
+    padding-right: 40px;
 }
