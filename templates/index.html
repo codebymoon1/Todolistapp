@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Professional Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include Canvas Confetti Library from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="todo-container">
+        <!-- Floating Success Toast Notification -->
+        <div id="toast" class="toast-notification">🎉 Great job completing your task! Keep it up!</div>
+
+        <h1 class="head1">My To-Do List</h1>
+        <p class="subtitle">Stay organized and productive every day.</p>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <span>Total: <strong>{{ total }}</strong></span>
+            <span>Pending: <strong>{{ pending }}</strong></span>
+            <span>Done: <strong>{{ completed }}</strong></span>
+        </div>
+
+        <!-- Task Input Form -->
+        <form action="/" method="POST">
+            <input type="text" name="title" placeholder="Enter a new task..." required autocomplete="off">
+            <button type="submit" class="btn-add">Add Task</button>
+        </form>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <a href="/?filter=all" class="{% if current_filter == 'all' %}active{% endif %}">All</a>
+            <a href="/?filter=active" class="{% if current_filter == 'active' %}active{% endif %}">Active</a>
+            <a href="/?filter=completed" class="{% if current_filter == 'completed' %}active{% endif %}">Completed</a>
+        </div>
+
+        <!-- Display Tasks List -->
+        <h2>Current Tasks</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <!-- Inline Edit Form -->
+                    <form action="/edit/{{ task.id }}" method="POST" class="edit-form">
+                        <input type="text" name="title" value="{{ task.title }}" class="task-input-edit {% if task.complete %}completed{% endif %}" required>
+                        <button type="submit" class="btn-save">Save</button>
+                    </form>
+                    
+                    <div class="task-actions">
+                        <!-- Pass the event and URL into our delayed celebration function -->
+                        <a href="/update/{{ task.id }}" class="btn-status" {% if not task.complete %}onclick="triggerCelebration(event, this.href)"{% endif %}>
+                            {% if task.complete %}Undo{% else %}Done{% endif %}
+                        </a>
+                        <a href="/delete/{{ task.id }}" class="btn-delete">Delete</a>
+                    </div>
+                </li>
+            {% else %}
+                <p class="empty-msg">No tasks found in this view.</p>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Delayed Celebration Animation Script -->
+    <script>
+        function triggerCelebration(event, targetUrl) {
+            // Stop the link from instantly redirecting the page
+            event.preventDefault();
+
+            // 1. Show floating success toast animation
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+
+            // 2. Trigger multi-burst firework confetti effect
+            var count = 200;
+            var defaults = {
+              origin: { y: 0.7 }
+            };
+
+            function fire(particleRatio, opts) {
+              confetti(Object.assign({}, defaults, opts, {
+                particleCount: Math.floor(count * particleRatio)
+              }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+
+            // 3. Wait 1.8 seconds so you can enjoy the animation, THEN redirect the page
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 1800);
+        }
+    </script>
+</body>
+</html>
